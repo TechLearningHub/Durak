@@ -14,7 +14,7 @@ var dataSourceBuilder =
 var dataSource = dataSourceBuilder.Build();
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
-    { 
+    {
         options.UseNpgsql(dataSource, x =>
         {
             x.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName);
