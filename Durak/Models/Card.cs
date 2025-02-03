@@ -4,8 +4,8 @@ namespace Durak;
 
 public  class Card
 {
-    public int Id { get;}
-    public int Suit { get; set; }
-    public int Rank { get; set; }
+    public int Id { get; set; }
+    public string Suit { get; set; }
+    public string Rank { get; set; }
 }
     
