@@ -9,7 +9,7 @@ public sealed class DatabaseContext : DbContext
 
     public DatabaseContext()
     {
-        // Database.EnsureDeleted();
+        Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 

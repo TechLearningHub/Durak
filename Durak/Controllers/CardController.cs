@@ -1,5 +1,4 @@
-﻿using Durak.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;
 
@@ -31,45 +30,12 @@ public class CardController : Controller
 {
     public List<Card> Cards = new List<Card>();
 
-  
-    DatabaseContext database = new DatabaseContext();
-
     [HttpPost]
-    public void CreateingDb([FromBody] Card card)
+    public IActionResult AddCard(Card card)
     {
-        var entity = new Card();
-        entity.Rank = card.Rank;
-        entity.Suit = card.Suit;
-        database.Cards.Add(entity);
-        database.SaveChanges();
+        Cards.Add(card);
+        return Ok(card);
     }
-    
-    [HttpGet]
-    public OkObjectResult GetCards()
-    {
-        var queryable = database.Cards.ToList();
-        return Ok(queryable);
-    }
-
-    [HttpDelete]
-    public void DeleteCard(int id)
-    {
-        database.Cards.Remove(database.Cards.Find(id));
-        database.SaveChanges();
-    }
-
-    [HttpPut]
-    public void UpdateCard([FromBody] Card card)
-    {
-        database.Cards.Update(card);
-        database.SaveChanges();
-    }
-    // public string GetCards()
-    // {
-    //
-    //     database.Cards.Select()
-    // }
-    
     // public string CreateDb(Card card)
     // {
 
