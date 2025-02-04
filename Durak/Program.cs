@@ -13,11 +13,11 @@ var dataSourceBuilder =
 
 var dataSource = dataSourceBuilder.Build();
 
-builder.Services.AddDbContext<DatabaseContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     {
         options.UseNpgsql(dataSource, x =>
         {
-            x.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName);
+            x.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
         });
     }
 );
