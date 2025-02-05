@@ -19,11 +19,10 @@ public sealed class ApplicationDbContext : DbContext
         : base(contextOptions)
     {
     }
-
-    
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
         // Player
         modelBuilder.Entity<PlayerEntity>()
             .Property(d => d.Id)
