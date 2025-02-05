@@ -5,6 +5,7 @@ namespace Durak.Domain.Entities;
 public class MovesHistoryEntity : BaseEntity<long>
 {
     
+    
     public override long Id { get; set; }
 
     public List<long> MovedCardIds { get; set; } = [];
