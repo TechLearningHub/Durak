@@ -2,7 +2,7 @@ using Durak.Domain.Enums;
 
 namespace Durak.Domain.Entities;
 
-public class MoveHistoryEntity : BaseEntity<long>
+public class MovesHistoryEntity : BaseEntity<long>
 {
     public override long Id { get; set; }
 
