@@ -20,8 +20,6 @@ public sealed class ApplicationDbContext : DbContext
     {
     }
 
-    
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Player
