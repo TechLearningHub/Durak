@@ -1,3 +1,5 @@
+using Durak.Contracts;
+
 namespace Durak.Domain.Entities;
 
 public class DeskEntity : BaseEntity<long>

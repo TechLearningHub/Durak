@@ -1,3 +1,6 @@
+using Durak;
+using Durak.Contracts;
+using Durak.Domain.Entities;
 using Durak.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -7,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-var test = builder.Configuration.GetConnectionString("DbConnectionString");
+builder.Services.AddScoped<ICardService, CardService>();
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+
 var dataSourceBuilder =
     new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DbConnectionString"));
 

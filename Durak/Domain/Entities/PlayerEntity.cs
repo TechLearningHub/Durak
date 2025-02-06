@@ -1,10 +1,12 @@
+using Durak.Contracts;
+
 namespace Durak.Domain.Entities;
 
 public class PlayerEntity : BaseEntity<long>
 {
     public override long Id { get; set; }
 
-    public string NickName { get; set; } = string.Empty;
+    public string? NickName { get; set; } = string.Empty;
 
     public List<MovesHistoryEntity> MovesHistories { get; set; } = [];
 }
