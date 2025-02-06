@@ -23,4 +23,22 @@ public class CardController : ControllerBase
     {
         _cardService.CreateCardEntity(cardRequest);
     }
+
+    [HttpGet]
+    public CardEntity GetCardEntity(int id)
+    {
+        return _cardService.GetCardEntity(id);
+    }
+
+    [HttpPut]
+    public CardEntity Put(int id, CardRequest cardRequest)
+    {
+        return _cardService.UpdateCardEntity(id, cardRequest);
+    }
+
+    [HttpDelete]
+    public CardEntity Delete(int id)
+    {
+        return _cardService.DeleteCardEntity(id);
+    }
 }
