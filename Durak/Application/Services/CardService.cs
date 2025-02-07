@@ -1,8 +1,9 @@
-﻿using Durak.Contracts;
+﻿using Durak.Application.Interfaces;
+using Durak.Contracts.Request;
 using Durak.Domain.Entities;
 using Durak.Infrastructure;
 
-namespace Durak;
+namespace Durak.Application.Services;
 
 public class CardService : ICardService
 {

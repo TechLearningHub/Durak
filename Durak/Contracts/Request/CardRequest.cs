@@ -1,6 +1,6 @@
 ﻿using Durak.Domain.Enums;
 
-namespace Durak.Contracts;
+namespace Durak.Contracts.Request;
 
 public class CardRequest
 {

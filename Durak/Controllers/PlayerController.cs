@@ -1,5 +1,6 @@
-﻿using Durak.Contracts;
-using Durak.Domain.Entities;
+﻿using Durak.Application.Interfaces;
+using Durak.Contracts.Request;
+using Durak.Contracts.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;
@@ -22,7 +23,7 @@ public class PlayerController: ControllerBase
     }
 
     [HttpGet]
-    public PlayerEntity? Get(int playerId)
+    public PlayerResponse? Get(int playerId)
     {
       return  _playerService.GetPlayerById(playerId);
     }

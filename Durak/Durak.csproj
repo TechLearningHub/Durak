@@ -25,8 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\Interfaces\" />
-      <Folder Include="Request\" />
+      <Folder Include="Contracts\" />
     </ItemGroup>
 
 </Project>

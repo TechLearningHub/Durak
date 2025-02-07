@@ -1,4 +1,5 @@
-﻿using Durak.Contracts;
+﻿using Durak.Application.Interfaces;
+using Durak.Contracts.Request;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;

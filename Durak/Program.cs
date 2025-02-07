@@ -1,5 +1,6 @@
 using Durak;
-using Durak.Contracts;
+using Durak.Application.Interfaces;
+using Durak.Application.Services;
 using Durak.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;

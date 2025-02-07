@@ -1,4 +1,4 @@
-﻿namespace Durak.Contracts;
+﻿namespace Durak.Contracts.Request;
 
 public class PlayerRequest
 {
