@@ -33,7 +33,7 @@ public sealed class ApplicationDbContext : DbContext
         modelBuilder.Entity<PlayerEntity>()
             .Property(e => e.NickName)
             .HasMaxLength(40);
-        
+
         // Card
         modelBuilder.Entity<CardEntity>()
             .HasKey(d => d.Id);
