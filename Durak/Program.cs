@@ -1,13 +1,10 @@
 using Durak;
 using Durak.Contracts;
-using Durak.Domain.Entities;
 using Durak.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<ICardService, CardService>();

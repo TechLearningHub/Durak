@@ -33,7 +33,7 @@ public sealed class ApplicationDbContext : DbContext
         modelBuilder.Entity<PlayerEntity>()
             .Property(e => e.NickName)
             .HasMaxLength(40);
-        
+
         // Card
         modelBuilder.Entity<CardEntity>()
             .HasKey(d => d.Id);
@@ -99,7 +99,7 @@ public sealed class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<MovesHistoryEntity>()
             .HasOne(e => e.Player)
-            .WithMany(e=>e.MovesHistories )
+            .WithMany(e => e.MovesHistories)
             .HasForeignKey(e => e.PlayerId);
 
         modelBuilder.Entity<MovesHistoryEntity>()

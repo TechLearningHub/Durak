@@ -1,5 +1,3 @@
-using Durak.Contracts;
-
 namespace Durak.Domain.Entities;
 
 public class HandEntity : BaseEntity<long>

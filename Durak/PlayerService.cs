@@ -24,7 +24,7 @@ public class PlayerService : IPlayerService
         return player;
     }
 
-    public PlayerEntity GetPlayerById(int playerId)
+    public PlayerEntity? GetPlayerById(int playerId)
     {
         return _context.Players.FirstOrDefault(p => p.Id == playerId);
     }
@@ -32,17 +32,27 @@ public class PlayerService : IPlayerService
     public PlayerEntity DeletePlayerById(int playerId)
     {
         var player = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        
+        if (player == null)
+        {
+            throw new Exception($"Not found object by id: {playerId}");
+        }
+
         _context.Players.Remove(player);
-        _context.SaveChanges();
         _context.SaveChanges();
         return player;
     }
 
-    public PlayerEntity? UpdatePlayer(int id, PlayerRequest? playerRequest)
+    public PlayerEntity UpdatePlayer(int id, PlayerRequest playerRequest)
     {
         var player = _context.Players.FirstOrDefault(p => p.Id == id);
-        if (player == null) return null;
-        player.NickName = playerRequest?.NickName;
+        
+        if (player == null)
+        {
+            throw new Exception($"Not found object by id: {id}");
+        }
+        
+        player.NickName = playerRequest.NickName;
         _context.Players.Update(player);
         _context.SaveChanges();
         return player;

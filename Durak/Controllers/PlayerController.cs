@@ -22,7 +22,7 @@ public class PlayerController: ControllerBase
     }
 
     [HttpGet]
-    public PlayerEntity Get(int playerId)
+    public PlayerEntity? Get(int playerId)
     {
       return  _playerService.GetPlayerById(playerId);
     }

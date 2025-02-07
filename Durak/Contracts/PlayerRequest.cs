@@ -1,6 +1,4 @@
-﻿using Durak.Domain.Entities;
-
-namespace Durak.Contracts;
+﻿namespace Durak.Contracts;
 
 public class PlayerRequest
 {

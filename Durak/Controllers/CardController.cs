@@ -1,6 +1,4 @@
 ﻿using Durak.Contracts;
-using Durak.Domain.Entities;
-using Durak.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;
@@ -16,7 +14,6 @@ public class CardController: ControllerBase
      _cardService= cardService;
  }
     [HttpPost]
-    // fix return type 
     public void Post(CardRequest card)
     {
        _cardService.AddCard(card);

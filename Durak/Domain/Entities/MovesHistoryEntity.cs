@@ -1,4 +1,3 @@
-using Durak.Contracts;
 using Durak.Domain.Enums;
 
 namespace Durak.Domain.Entities;
