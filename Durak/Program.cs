@@ -1,4 +1,3 @@
-using Durak;
 using Durak.Application.Interfaces;
 using Durak.Application.Services;
 using Durak.Infrastructure;
@@ -11,7 +10,6 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IHandService, HandService>();
 builder.Services.AddScoped<IDeskService, DeskService>();
-
 
 var dataSourceBuilder =
     new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DbConnectionString"));

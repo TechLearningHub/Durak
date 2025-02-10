@@ -8,8 +8,6 @@ namespace Durak.Application.Services;
 
 public class HandService(ApplicationDbContext context) : IHandService
 {
-    private readonly ApplicationDbContext _context = context;
-
     public HandResponse AddHand(HandRequest request)
     {
         var hand = new HandEntity
@@ -17,8 +15,8 @@ public class HandService(ApplicationDbContext context) : IHandService
             PlayerId = request.PlayerId,
         };
 
-        var handEntity = _context.Hands.Add(hand).Entity;
-        _context.SaveChanges();
+        var handEntity = context.Hands.Add(hand).Entity;
+        context.SaveChanges();
 
         var handResponse = new HandResponse
         {
@@ -30,10 +28,10 @@ public class HandService(ApplicationDbContext context) : IHandService
 
     public HandResponse? GetHandById(int handId)
     {
-        var handEntity = _context.Hands.FirstOrDefault(x => x.Id == handId);
+        var handEntity = context.Hands.Find(handId);
         if (handEntity == null)
         {
-            throw new Exception($"Not found id: {handId}");
+            return null;
         }
 
         var handResponse = new HandResponse
@@ -46,17 +44,17 @@ public class HandService(ApplicationDbContext context) : IHandService
         return handResponse;
     }
 
-    public HandResponse DeleteHandById(int handId)
+    public void DeleteHandById(int handId)
     {
-        var handEntity = _context.Hands.FirstOrDefault(p => p.Id == handId);
+        var handEntity = context.Hands.Find(handId);
 
         if (handEntity == null)
         {
             throw new Exception($"Not found object by id: {handId}");
         }
 
-        _context.Hands.Remove(handEntity);
-        _context.SaveChanges();
+        context.Hands.Remove(handEntity);
+        context.SaveChanges();
 
         var handResponse = new HandResponse()
         {
@@ -64,13 +62,11 @@ public class HandService(ApplicationDbContext context) : IHandService
             DeskId = handEntity.DeskId,
             PlayerId = handEntity.PlayerId
         };
-
-        return handResponse;
     }
 
     public HandResponse UpdateHand(int handId, HandRequest handRequest)
     {
-        var handEntity = _context.Hands.FirstOrDefault(p => p.Id == handId);
+        var handEntity = context.Hands.Find(handId);
 
         if (handEntity == null)
         {
@@ -78,8 +74,8 @@ public class HandService(ApplicationDbContext context) : IHandService
         }
 
         handEntity.DeskId = handRequest.DeskId;
-        _context.Hands.Update(handEntity);
-        _context.SaveChanges();
+        context.Hands.Update(handEntity);
+        context.SaveChanges();
         var handResponse = new HandResponse()
         {
             Id = handId,

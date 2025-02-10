@@ -8,8 +8,6 @@ namespace Durak.Application.Services;
 
 public class DeskService(ApplicationDbContext context) : IDeskService
 {
-    private readonly ApplicationDbContext _context = context;
-
     public DeskResponse AddDesk(DeskRequest request)
     {
         var desk = new DeskEntity
@@ -18,8 +16,8 @@ public class DeskService(ApplicationDbContext context) : IDeskService
             CardId = request.CardId
         };
 
-        var handEntity = _context.Desks.Add(desk).Entity;
-        _context.SaveChanges();
+        var handEntity = context.Desks.Add(desk).Entity;
+        context.SaveChanges();
 
         var deskResponse = new DeskResponse()
         {
@@ -32,10 +30,10 @@ public class DeskService(ApplicationDbContext context) : IDeskService
 
     public DeskResponse? GetDeskById(int deskId)
     {
-        var deskEntity = _context.Desks.FirstOrDefault(x => x.Id == deskId);
+        var deskEntity = context.Desks.Find(deskId);
         if (deskEntity == null)
         {
-            throw new Exception($"Not found id: {deskId}");
+            return null;
         }
 
         var deskResponse = new DeskResponse()
@@ -48,32 +46,29 @@ public class DeskService(ApplicationDbContext context) : IDeskService
         return deskResponse;
     }
 
-    public DeskResponse DeleteDeskById(int deskId)
+    public void DeleteDeskById(int deskId)
     {
-        var deskEntity = _context.Desks.FirstOrDefault(p => p.Id == deskId);
+        var deskEntity = context.Desks.Find(deskId);
 
         if (deskEntity == null)
         {
             throw new Exception($"Not found object by id: {deskId}");
         }
 
-        _context.Desks.Remove(deskEntity);
-        _context.SaveChanges();
+        context.Desks.Remove(deskEntity);
+        context.SaveChanges();
 
         var deskResponse = new DeskResponse()
         {
             Id = deskId,
             Winner = deskEntity.Winner,
             CardId = deskEntity.CardId
-           
         };
-
-        return deskResponse;
     }
 
     public DeskResponse? UpdateDesk(int deskId, DeskRequest deskRequest)
     {
-        var deskEntity = _context.Desks.FirstOrDefault(p => p.Id == deskId);
+        var deskEntity = context.Desks.Find(deskId);
 
         if (deskEntity == null)
         {
@@ -82,15 +77,16 @@ public class DeskService(ApplicationDbContext context) : IDeskService
 
         deskEntity.CardId = deskRequest.CardId;
         deskEntity.Winner = deskRequest.Winner;
-        _context.Desks.Update(deskEntity);
-        _context.SaveChanges();
-        
+        context.Desks.Update(deskEntity);
+        context.SaveChanges();
+
         var deskResponse = new DeskResponse()
-        { Id = deskId,
-           Winner = deskEntity.Winner,
-           CardId = deskEntity.CardId
+        {
+            Id = deskId,
+            Winner = deskEntity.Winner,
+            CardId = deskEntity.CardId
         };
-        
+
         return deskResponse;
     }
 }

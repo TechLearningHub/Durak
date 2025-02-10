@@ -8,8 +8,6 @@ namespace Durak.Application.Services;
 
 public class PlayerService(ApplicationDbContext context) : IPlayerService
 {
-    private readonly ApplicationDbContext _context = context;
-
     public PlayerResponse AddPlayer(PlayerRequest playerRequest)
     {
         var player = new PlayerEntity
@@ -17,8 +15,8 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
             NickName = playerRequest.NickName
         };
 
-        var playerEntity = _context.Players.Add(player).Entity;
-        _context.SaveChanges();
+        var playerEntity = context.Players.Add(player).Entity;
+        context.SaveChanges();
 
         var playerResponse = new PlayerResponse
         {
@@ -31,11 +29,11 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
 
     public PlayerResponse? GetPlayerById(int playerId)
     {
-        var playerEntity = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        var playerEntity = context.Players.Find(playerId);
 
         if (playerEntity == null)
         {
-            throw new Exception($"Not found id: {playerId}");
+            return null;
         }
         
         var playerResponse = new PlayerResponse
@@ -49,21 +47,21 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
 
     public void DeletePlayerById(int playerId)
     {
-        var playerEntity = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        var playerEntity = context.Players.Find(playerId);
 
         if (playerEntity == null)
         {
             throw new Exception($"Not found object by id: {playerId}");
         }
         
-     var delete=   _context.Players.Remove(playerEntity);
+     var delete=context.Players.Remove(playerEntity);
      
-        _context.SaveChanges();
+        context.SaveChanges();
     }
 
     public PlayerResponse UpdatePlayer(int playerId, PlayerRequest playerRequest)
     {
-        var player = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        var player = context.Players.Find(playerId);
 
         if (player == null)
         {
@@ -71,13 +69,14 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
         }
 
         player.NickName = playerRequest.NickName;
-        _context.Players.Update(player);
-        _context.SaveChanges();
+        context.Players.Update(player);
+        context.SaveChanges();
         var playerResponse = new PlayerResponse
         {
             NickName = playerRequest.NickName,
             Id = player.Id
         };
+        
         return playerResponse;
     }
 }
