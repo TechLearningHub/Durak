@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
 builder.Services.AddScoped<IHandService, HandService>();
 builder.Services.AddScoped<IDeskService, DeskService>();
-builder.Services.AddScoped<ICardService, CardService>();
+// builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IGameService, GameService>();
 
 

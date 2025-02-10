@@ -8,7 +8,7 @@ public class HandEntity : BaseEntity<long>
 
     public long PlayerId { get; set; }
 
-    public List<long> CardIds { get; set; } = []; //ignore
+    public HashSet<long> CardIds { get; set; } = []; 
     
     public DeskEntity Desk { get; set; } = new(); //ignore
     
