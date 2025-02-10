@@ -1,0 +1,12 @@
+﻿using Durak.Contracts.Request;
+using Durak.Contracts.Responses;
+
+namespace Durak.Application.Interfaces;
+
+public interface IDeskService
+{
+    public DeskResponse AddDesk(DeskRequest request);
+    public DeskResponse? GetDeskById(int deskId);
+    public DeskResponse DeleteDeskById(int deskId);
+    public DeskResponse? UpdateDesk(int deskId, DeskRequest deskRequest);
+}

@@ -8,12 +8,14 @@ using Npgsql;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IHandService, HandService>();
+builder.Services.AddScoped<IDeskService, DeskService>();
+
 
 var dataSourceBuilder =
     new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DbConnectionString"));
-
+dataSourceBuilder.EnableDynamicJson();
 var dataSource = dataSourceBuilder.Build();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

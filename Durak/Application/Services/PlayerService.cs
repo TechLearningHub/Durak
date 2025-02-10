@@ -35,7 +35,7 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
 
         if (playerEntity == null)
         {
-            return null;
+            throw new Exception($"Not found id: {playerId}");
         }
         
         var playerResponse = new PlayerResponse
@@ -47,7 +47,7 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
         return playerResponse;
     }
 
-    public PlayerResponse DeletePlayerById(int playerId)
+    public void DeletePlayerById(int playerId)
     {
         var playerEntity = _context.Players.FirstOrDefault(p => p.Id == playerId);
 
@@ -55,17 +55,10 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
         {
             throw new Exception($"Not found object by id: {playerId}");
         }
-
-        _context.Players.Remove(playerEntity);
+        
+     var delete=   _context.Players.Remove(playerEntity);
+     
         _context.SaveChanges();
-
-        var playerResponse = new PlayerResponse
-        {
-            Id = playerId,
-            NickName = playerEntity.NickName
-        };
-
-        return playerResponse;
     }
 
     public PlayerResponse UpdatePlayer(int playerId, PlayerRequest playerRequest)

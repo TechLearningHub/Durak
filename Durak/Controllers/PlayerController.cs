@@ -17,13 +17,13 @@ public class PlayerController: ControllerBase
     }
 
     [HttpPost]
-    public void Post(PlayerRequest playerRequest)
+    public PlayerResponse AddPlayer(PlayerRequest playerRequest)
     {
-        _playerService.AddPlayer(playerRequest);
+      return  _playerService.AddPlayer(playerRequest);
     }
 
     [HttpGet]
-    public PlayerResponse? Get(int playerId)
+    public PlayerResponse? GetPlayerById(int playerId)
     {
       return  _playerService.GetPlayerById(playerId);
     }
@@ -31,12 +31,13 @@ public class PlayerController: ControllerBase
     [HttpDelete]
     public void DeletePlayer(int playerId)
     {
-        _playerService.DeletePlayerById(playerId);
+      _playerService.DeletePlayerById(playerId);
+       
     }
 
     [HttpPut]
-    public void Put(PlayerRequest playerRequest,int playerId)
+    public PlayerResponse? UpdatePlayer(PlayerRequest playerRequest,int playerId)
     {
-        _playerService.UpdatePlayer(playerId, playerRequest);
+       return _playerService.UpdatePlayer(playerId, playerRequest);
     }
 }
