@@ -6,11 +6,11 @@ using Durak.Infrastructure;
 
 namespace Durak.Application.Services;
 
-public class CardServise : ICard
+public class CardService : ICardService
 {
     private readonly ApplicationDbContext _context;
 
-    public CardServise(ApplicationDbContext context) => _context = context;
+    public CardService(ApplicationDbContext context) => _context = context;
 
     public CardResponse AddCard(CardRequest cardRequest)
     {
@@ -33,12 +33,12 @@ public class CardServise : ICard
         return cardResponse;
     }
 
-    public CardResponse GetCard(int cardId)
+    public CardResponse? GetCard(int cardId)
     {
-        var cardEntity = _context.Cards.FirstOrDefault(p => p.Id == cardId);
+        var cardEntity = _context.Cards.Find(cardId);
         if (cardEntity == null)
         {
-            throw new Exception($"not found id by {cardId}");
+            return null;
         }
 
         var cardResponse = new CardResponse()
@@ -53,10 +53,10 @@ public class CardServise : ICard
 
     public CardResponse UpdateCard(int cardId, CardRequest cardRequest)
     {
-        var cardEntity = _context.Cards.FirstOrDefault(p => p.Id == cardId);
+        var cardEntity = _context.Cards.Find(cardId);
         if (cardEntity == null)
         {
-            throw new Exception($"not found id by {cardId}");
+            throw new Exception($"not find card by id: {cardId}");
         }
 
         cardEntity.Id = cardId;
@@ -76,10 +76,10 @@ public class CardServise : ICard
 
     public CardResponse DeleteCard(int cardId)
     {
-        var cardEntity = _context.Cards.FirstOrDefault(p => p.Id == cardId);
+        var cardEntity = _context.Cards.Find(cardId);
         if (cardEntity == null)
         {
-            throw new Exception($"not found id by {cardId}");
+            throw new Exception($"not find card by id: {cardId}");
         }
 
         _context.Cards.Remove(cardEntity);

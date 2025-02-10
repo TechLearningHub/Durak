@@ -9,34 +9,34 @@ namespace Durak.Controllers;
 [Route("[controller]")]
 public class CardController : ControllerBase
 {
-    private readonly ICard _card;
+    private readonly ICardService _cardService;
 
-    public CardController(ICard card)
+    public CardController(ICardService cardService)
     {
-        _card = card;
+        _cardService = cardService;
     }
 
     [HttpPost]
-    public void Post(CardRequest card)
+    public CardResponse Post(CardRequest card)
     {
-        _card.AddCard(card);
+        return _cardService.AddCard(card);
     }
 
     [HttpGet]
     public CardResponse GetCard(int cardId)
     {
-        return _card.GetCard(cardId);
+        return _cardService.GetCard(cardId);
     }
 
     [HttpPut]
     public CardResponse CardUpdate(int cardId, CardRequest cardRequest)
     {
-        return _card.UpdateCard(cardId, cardRequest);
+        return _cardService.UpdateCard(cardId, cardRequest);
     }
 
     [HttpDelete]
-    public void DeleteCard(int cardId)
+    public CardResponse DeleteCard(int cardId)
     {
-        _card.DeleteCard(cardId);
+        return _cardService.DeleteCard(cardId);
     }
 }
