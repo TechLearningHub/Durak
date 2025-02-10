@@ -71,11 +71,11 @@ public sealed class ApplicationDbContext : DbContext
             .HasOne(e => e.Player)
             .WithMany()
             .HasForeignKey(e => e.PlayerId);
-        
+
         modelBuilder.Entity<HandEntity>()
             .Property(e => e.CardIds)
             .HasColumnType("jsonb");
-        
+
         modelBuilder.Entity<HandEntity>()
             .HasOne(e => e.Desk)
             .WithMany()

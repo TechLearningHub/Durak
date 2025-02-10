@@ -7,7 +7,7 @@ namespace Durak.Controllers;
 
 [ApiController]
 [Route("[controller]/[action]")]
-public class HandController: ControllerBase
+public class HandController : ControllerBase
 {
     private readonly IHandService _handService;
 
@@ -21,22 +21,22 @@ public class HandController: ControllerBase
     {
         _handService.AddHand(handRequest);
     }
-    
+
     [HttpGet]
     public HandResponse? GetHandById(int handId)
     {
-        return  _handService.GetHandById(handId);
+        return _handService.GetHandById(handId);
     }
-    
+
     [HttpDelete]
     public void DeletePlayer(int handId)
     {
         _handService.DeleteHandById(handId);
     }
-    
+
     [HttpPut]
-    public void UpdateHand(HandRequest handRequest,int handId)
+    public HandResponse UpdateHand(HandRequest handRequest, int handId)
     {
-        _handService.UpdateHand(handId, handRequest);
+        return _handService.UpdateHand(handId, handRequest);
     }
 }

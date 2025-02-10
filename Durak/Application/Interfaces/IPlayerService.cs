@@ -3,7 +3,7 @@ using Durak.Contracts.Responses;
 
 namespace Durak.Application.Interfaces;
 
- public interface IPlayerService
+public interface IPlayerService
 {
     public PlayerResponse AddPlayer(PlayerRequest player);
     public PlayerResponse? GetPlayerById(int playerId);

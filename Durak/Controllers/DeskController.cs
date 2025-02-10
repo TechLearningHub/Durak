@@ -4,10 +4,9 @@ using Durak.Contracts.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;
- 
+
 [ApiController]
 [Route("[controller]/[action]")]
-
 public class DeskController : ControllerBase
 {
     private readonly IDeskService _deskService;
@@ -36,8 +35,8 @@ public class DeskController : ControllerBase
     }
 
     [HttpPut]
-    public void UpdateDesk(DeskRequest deskRequest, int deskId)
+    public DeskResponse UpdateDesk(DeskRequest deskRequest, int deskId)
     {
-        _deskService.UpdateDesk(deskId, deskRequest);
+        return _deskService.UpdateDesk(deskId, deskRequest);
     }
 }
