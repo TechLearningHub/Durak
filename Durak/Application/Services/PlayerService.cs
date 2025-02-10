@@ -1,5 +1,5 @@
 ﻿using Durak.Application.Interfaces;
-using Durak.Contracts.Request;
+using Durak.Contracts.Requests;
 using Durak.Contracts.Responses;
 using Durak.Domain.Entities;
 using Durak.Infrastructure;

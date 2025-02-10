@@ -1,4 +1,4 @@
-﻿using Durak.Contracts.Request;
+﻿using Durak.Contracts.Requests;
 using Durak.Contracts.Responses;
 
 namespace Durak.Application.Interfaces;
