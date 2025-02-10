@@ -15,7 +15,7 @@ public class HandService(ApplicationDbContext context) : IHandService
             PlayerId = request.PlayerId,
         };
 
-        var handEntity = context.Hands.Add(hand).Entity;
+        context.Hands.Add(hand);
         context.SaveChanges();
 
         var handResponse = new HandResponse
@@ -40,7 +40,7 @@ public class HandService(ApplicationDbContext context) : IHandService
             DeskId = handEntity.DeskId,
             PlayerId = handEntity.PlayerId
         };
-        
+
         return handResponse;
     }
 

@@ -35,7 +35,7 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
         {
             return null;
         }
-        
+
         var playerResponse = new PlayerResponse
         {
             Id = playerId,
@@ -53,9 +53,9 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
         {
             throw new Exception($"Not found object by id: {playerId}");
         }
-        
-     var delete=context.Players.Remove(playerEntity);
-     
+
+        context.Players.Remove(playerEntity);
+
         context.SaveChanges();
     }
 
@@ -76,7 +76,7 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
             NickName = playerRequest.NickName,
             Id = player.Id
         };
-        
+
         return playerResponse;
     }
 }

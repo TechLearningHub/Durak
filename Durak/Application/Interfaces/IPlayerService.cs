@@ -8,5 +8,5 @@ namespace Durak.Application.Interfaces;
     public PlayerResponse AddPlayer(PlayerRequest player);
     public PlayerResponse? GetPlayerById(int playerId);
     public void DeletePlayerById(int playerId);
-    public PlayerResponse? UpdatePlayer(int playerId, PlayerRequest playerRequest);
+    public PlayerResponse UpdatePlayer(int playerId, PlayerRequest playerRequest);
 }

@@ -66,7 +66,7 @@ public class DeskService(ApplicationDbContext context) : IDeskService
         };
     }
 
-    public DeskResponse? UpdateDesk(int deskId, DeskRequest deskRequest)
+    public DeskResponse UpdateDesk(int deskId, DeskRequest deskRequest)
     {
         var deskEntity = context.Desks.Find(deskId);
 

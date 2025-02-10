@@ -8,5 +8,5 @@ public interface IHandService
     public HandResponse AddHand(HandRequest request);
     public HandResponse? GetHandById(int handId);
     public void DeleteHandById(int handId);
-    public HandResponse? UpdateHand(int handId, HandRequest handRequest);
+    public HandResponse UpdateHand(int handId, HandRequest handRequest);
 }
