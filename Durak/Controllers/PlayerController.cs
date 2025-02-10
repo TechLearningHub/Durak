@@ -1,13 +1,13 @@
 ﻿using Durak.Application.Interfaces;
-using Durak.Contracts.Request;
+using Durak.Contracts.Requests;
 using Durak.Contracts.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;
 
-    [ApiController]
-    [Route("[controller]")]
-public class PlayerController: ControllerBase
+[ApiController]
+[Route("[controller]")]
+public class PlayerController : ControllerBase
 {
     private readonly IPlayerService _playerService;
 
@@ -17,15 +17,15 @@ public class PlayerController: ControllerBase
     }
 
     [HttpPost]
-    public void Post(PlayerRequest playerRequest)
+    public PlayerResponse AddPlayer(PlayerRequest playerRequest)
     {
-        _playerService.AddPlayer(playerRequest);
+        return _playerService.AddPlayer(playerRequest);
     }
 
     [HttpGet]
-    public PlayerResponse? Get(int playerId)
+    public PlayerResponse? GetPlayerById(int playerId)
     {
-      return  _playerService.GetPlayerById(playerId);
+        return _playerService.GetPlayerById(playerId);
     }
 
     [HttpDelete]
@@ -35,8 +35,8 @@ public class PlayerController: ControllerBase
     }
 
     [HttpPut]
-    public void Put(PlayerRequest playerRequest,int playerId)
+    public PlayerResponse UpdatePlayer(PlayerRequest playerRequest, int playerId)
     {
-        _playerService.UpdatePlayer(playerId, playerRequest);
+        return _playerService.UpdatePlayer(playerId, playerRequest);
     }
 }
