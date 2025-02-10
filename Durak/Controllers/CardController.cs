@@ -1,5 +1,5 @@
 ﻿using Durak.Application.Interfaces;
-using Durak.Contracts.Request;
+using Durak.Contracts.Requests;
 using Durak.Contracts.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +23,7 @@ public class CardController : ControllerBase
     }
 
     [HttpGet]
-    public CardResponse GetCard(int cardId)
+    public CardResponse? GetCard(int cardId)
     {
         return _cardService.GetCard(cardId);
     }
