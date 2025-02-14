@@ -70,7 +70,7 @@ namespace Durak.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.PrimitiveCollection<List<long>>("CardIds")
+                    b.PrimitiveCollection<HashSet<long>>("CardIds")
                         .IsRequired()
                         .HasColumnType("jsonb");
 
@@ -115,12 +115,11 @@ namespace Durak.Infrastructure.Migrations
                     b.Property<bool>("IsTaken")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("MoveId")
-                        .IsRequired()
+                    b.Property<int>("MoveId")
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("integer");
 
-                    b.PrimitiveCollection<List<long>>("MovedCardIds")
+                    b.PrimitiveCollection<HashSet<long>>("MovedCardIds")
                         .IsRequired()
                         .HasColumnType("jsonb");
 

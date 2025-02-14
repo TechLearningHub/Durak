@@ -1,5 +1,6 @@
 ﻿using Durak.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Durak.Infrastructure;
 

@@ -1,13 +1,12 @@
+﻿using Durak.Domain.Entities;
 using Durak.Domain.Enums;
 
-namespace Durak.Domain.Entities;
+namespace Durak.Contracts.Request;
 
-public class MovesHistoryEntity : BaseEntity<long>
+public class MoveRequest
 {
-    public override long Id { get; set; }
-    public HashSet<long> MovedCardIds { get; set; } = [];
+    public List<long> MovedCardIds { get; set; } = [];
     public int MoveId { get; set; }
-
     public ActionTypeEnum ActionType { get; set; }
     public PlayerEntity Player { get; set; } = new();
     public long PlayerId { get; set; }

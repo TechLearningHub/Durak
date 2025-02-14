@@ -17,13 +17,13 @@ public class CardController : ControllerBase
     }
 
     [HttpPost]
-    public CardResponse Post(CardRequest card)
+    public CardResponse Post()
     {
-        return _cardService.AddCard(card);
+        return _cardService.AddCard();
     }
 
     [HttpGet]
-    public CardResponse GetCard(int cardId)
+    public CardResponse GetCard(long cardId)
     {
         return _cardService.GetCard(cardId);
     }

@@ -1,4 +1,3 @@
-using Durak;
 using Durak.Application.Interfaces;
 using Durak.Application.Services;
 using Durak.Infrastructure;
@@ -10,9 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<IPlayerService, PlayerService>();
+builder.Services.AddScoped<IGameService, GameServiceCopy>();
+builder.Services.AddScoped<IMoveService, MoveService>();
+
 
 var dataSourceBuilder =
     new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DbConnectionString"));
+dataSourceBuilder.EnableDynamicJson();
 
 var dataSource = dataSourceBuilder.Build();
 

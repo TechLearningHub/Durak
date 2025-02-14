@@ -2,6 +2,7 @@
 using Durak.Contracts.Request;
 using Durak.Contracts.Responses;
 using Durak.Domain.Entities;
+using Durak.Domain.Enums;
 using Durak.Infrastructure;
 
 namespace Durak.Application.Services;
@@ -12,28 +13,75 @@ public class CardService : ICardService
 
     public CardService(ApplicationDbContext context) => _context = context;
 
-    public CardResponse AddCard(CardRequest cardRequest)
+    public CardResponse AddCard()
     {
-        var cardEntity = new CardEntity()
+        List<CardEntity> cardEntity = new List<CardEntity>()
         {
-            Suit = cardRequest.Suit,
-            Rank = cardRequest.Rank
+            new() { Rank = RankEnum.Six, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Six, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Six, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Six, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Seven, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Seven, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Seven, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Seven, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Eight, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Eight, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Eight, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Eight, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Nine, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Nine, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Nine, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Nine, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Ten, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Ten, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Ten, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Ten, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Jack, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Jack, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Jack, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Jack, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Queen, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Queen, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Queen, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Queen, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.King, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.King, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.King, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.King, Suit = SuitEnum.Spade },
+
+            new() { Rank = RankEnum.Ace, Suit = SuitEnum.Club },
+            new() { Rank = RankEnum.Ace, Suit = SuitEnum.Diamond },
+            new() { Rank = RankEnum.Ace, Suit = SuitEnum.Heart },
+            new() { Rank = RankEnum.Ace, Suit = SuitEnum.Spade }
         };
 
-        _context.Cards.Add(cardEntity);
+        
+            _context.Cards.AddRange(cardEntity);
+            // foreach (var item in cardEntity)
+            // {
+            //     _context.Cards.Add(item);
+            // }
+        
+
         _context.SaveChanges();
+
 
         var cardResponse = new CardResponse()
         {
-            Id = cardEntity.Id,
-            Rank = cardEntity.Rank,
-            Suit = cardEntity.Suit
         };
 
         return cardResponse;
     }
 
-    public CardResponse? GetCard(int cardId)
+    public CardResponse? GetCard(long cardId)
     {
         var cardEntity = _context.Cards.Find(cardId);
         if (cardEntity == null)
@@ -84,7 +132,7 @@ public class CardService : ICardService
 
         _context.Cards.Remove(cardEntity);
         _context.SaveChanges();
-        
+
         var cardResponse = new CardResponse()
         {
             Id = cardId,

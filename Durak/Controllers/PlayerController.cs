@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Durak.Controllers;
 
-    [ApiController]
-    [Route("[controller]")]
-public class PlayerController: ControllerBase
+[ApiController]
+[Route("[controller]")]
+public class PlayerController : ControllerBase
 {
     private readonly IPlayerService _playerService;
 
@@ -25,7 +25,7 @@ public class PlayerController: ControllerBase
     [HttpGet]
     public PlayerResponse? Get(int playerId)
     {
-      return  _playerService.GetPlayerById(playerId);
+        return _playerService.GetPlayerById(playerId);
     }
 
     [HttpDelete]
@@ -35,7 +35,7 @@ public class PlayerController: ControllerBase
     }
 
     [HttpPut]
-    public void Put(PlayerRequest playerRequest,int playerId)
+    public void Put(PlayerRequest playerRequest, int playerId)
     {
         _playerService.UpdatePlayer(playerId, playerRequest);
     }
