@@ -8,8 +8,6 @@ namespace Durak.Application.Services;
 
 public class PlayerService(ApplicationDbContext context) : IPlayerService
 {
-    private readonly ApplicationDbContext _context = context;
-
     public PlayerResponse AddPlayer(PlayerRequest playerRequest)
     {
         var player = new PlayerEntity
@@ -17,8 +15,8 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
             NickName = playerRequest.NickName
         };
 
-        var playerEntity = _context.Players.Add(player).Entity;
-        _context.SaveChanges();
+        var playerEntity = context.Players.Add(player).Entity;
+        context.SaveChanges();
 
         var playerResponse = new PlayerResponse
         {
@@ -31,7 +29,7 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
 
     public PlayerResponse? GetPlayerById(int playerId)
     {
-        var playerEntity = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        var playerEntity = context.Players.FirstOrDefault(p => p.Id == playerId);
 
         if (playerEntity == null)
         {
@@ -49,15 +47,15 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
 
     public PlayerResponse DeletePlayerById(int playerId)
     {
-        var playerEntity = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        var playerEntity = context.Players.FirstOrDefault(p => p.Id == playerId);
 
         if (playerEntity == null)
         {
             throw new Exception($"Not found object by id: {playerId}");
         }
 
-        _context.Players.Remove(playerEntity);
-        _context.SaveChanges();
+        context.Players.Remove(playerEntity);
+        context.SaveChanges();
 
         var playerResponse = new PlayerResponse
         {
@@ -70,7 +68,7 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
 
     public PlayerResponse UpdatePlayer(int playerId, PlayerRequest playerRequest)
     {
-        var player = _context.Players.FirstOrDefault(p => p.Id == playerId);
+        var player = context.Players.FirstOrDefault(p => p.Id == playerId);
 
         if (player == null)
         {
@@ -78,8 +76,8 @@ public class PlayerService(ApplicationDbContext context) : IPlayerService
         }
 
         player.NickName = playerRequest.NickName;
-        _context.Players.Update(player);
-        _context.SaveChanges();
+        context.Players.Update(player);
+        context.SaveChanges();
         var playerResponse = new PlayerResponse
         {
             NickName = playerRequest.NickName,

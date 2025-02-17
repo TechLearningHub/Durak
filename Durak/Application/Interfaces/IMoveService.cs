@@ -8,12 +8,12 @@ namespace Durak.Application.Interfaces;
 public interface IMoveService
 {
     public MoveResponse CreateMoveHistoryFirstPlayer(ActionTypeEnum actionTypeEnum,
-        long playerId, bool isBeaten, bool isTaken, int moveCard);
+        long playerId, bool isTaken, int moveCard, bool isBeaten);
 
-    // public MoveResponse CreateMoveHistorySecondPlayer(ActionTypeEnum actionTypeEnum,
-    //     int playerId, bool isBeaten, bool isTaken);
-    //
-    // public MoveResponse GetMoveHistory(long moveId);
-    // public MoveResponse UpdateMoveHistory(MoveRequest moveRequest, long moveId);
-    // public MoveResponse DeleteMoveHistory(long moveId);
+    public MoveResponse CreateMoveHistorySecondPlayer(ActionTypeEnum actionTypeEnum,
+        long playerId, int moveCard, bool isTaken);
+
+    public HashSet<CardEntity> GetPFirstPlayerCards(long playerId);
+
+    public HashSet<CardEntity> GetSecondPlayerCards(long playerId);
 }

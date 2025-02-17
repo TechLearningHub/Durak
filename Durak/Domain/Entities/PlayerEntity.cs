@@ -6,5 +6,5 @@ public class PlayerEntity : BaseEntity<long>
 
     public string NickName { get; set; } = string.Empty;
 
-    public List<MovesHistoryEntity> MovesHistories { get; set; } = [];
+    public HashSet<MovesHistoryEntity> MovesHistories { get; set; } = [];
 }

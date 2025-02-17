@@ -10,7 +10,7 @@ public class GameService(ApplicationDbContext context) : IGameService
 
     private readonly Random _random = new();
 
-    public List<CardEntity> Withdraw(long playerId, long deskId)
+    public HashSet<CardEntity> Withdraw(long playerId, long deskId)
     {
         if (_cardList.Count <= 0)
         {
@@ -48,6 +48,6 @@ public class GameService(ApplicationDbContext context) : IGameService
             context.SaveChanges();
         }
 
-        return _cardList;
+        return _cardList.ToHashSet();
     }
 }

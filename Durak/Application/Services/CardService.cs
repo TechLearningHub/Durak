@@ -15,7 +15,7 @@ public class CardService : ICardService
 
     public CardResponse AddCard()
     {
-        List<CardEntity> cardEntity = new List<CardEntity>()
+        HashSet<CardEntity> cardEntity = new HashSet<CardEntity>
         {
             new() { Rank = RankEnum.Six, Suit = SuitEnum.Club },
             new() { Rank = RankEnum.Six, Suit = SuitEnum.Diamond },
@@ -63,19 +63,15 @@ public class CardService : ICardService
             new() { Rank = RankEnum.Ace, Suit = SuitEnum.Spade }
         };
 
-        
-            _context.Cards.AddRange(cardEntity);
-            // foreach (var item in cardEntity)
-            // {
-            //     _context.Cards.Add(item);
-            // }
-        
+        _context.Cards.AddRange(cardEntity);
 
         _context.SaveChanges();
-
-
+        var c = cardEntity.FirstOrDefault(x => x.Id > 0);
         var cardResponse = new CardResponse()
         {
+            Id = c.Id,
+            Rank = c.Rank,
+            Suit = c.Suit,
         };
 
         return cardResponse;

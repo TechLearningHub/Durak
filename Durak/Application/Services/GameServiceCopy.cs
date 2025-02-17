@@ -10,7 +10,7 @@ public class GameServiceCopy(ApplicationDbContext context) : IGameService
 
     private readonly Random _random = new();
 
-    public List<CardEntity> Withdraw(long playerId, long deskId)
+    public HashSet<CardEntity> Withdraw(long playerId, long deskId)
     {
         if (_deck.Count <= 0)
         {
@@ -18,13 +18,13 @@ public class GameServiceCopy(ApplicationDbContext context) : IGameService
         }
 
         var playerEntity = context.Players.FirstOrDefault(x => x.Id == playerId)
-            ?? throw new Exception("Not found player");
+                           ?? throw new Exception("Not found player");
 
         var handEntity = new HandEntity();
 
         if (_deck.Count <= 6)
         {
-            handEntity.CardIds.UnionWith(_deck.Select(e => e.Id).ToList());
+            handEntity.CardIds.AddRange(_deck.Select(e => e.Id).ToList());
             handEntity.Player = playerEntity;
             handEntity.DeskId = deskId;
             context.Hands.Add(handEntity);
@@ -43,13 +43,12 @@ public class GameServiceCopy(ApplicationDbContext context) : IGameService
         context.Hands.Add(handEntity);
         context.SaveChanges();
 
-        return _deck;
+        return _deck.ToHashSet();
     }
 
     private void AddRandomCardToPlayerHand(HandEntity handEntity)
     {
         var cardIndex = _random.Next(1, _deck.Count);
-
         var card = _deck[cardIndex];
         handEntity.CardIds.Add(card.Id);
         _deck.RemoveAt(cardIndex);

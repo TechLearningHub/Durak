@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Durak.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Durak.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250214142842_ConvertedCardIdsToHashSet")]
+    partial class ConvertedCardIdsToHashSet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +75,7 @@ namespace Durak.Infrastructure.Migrations
 
                     b.PrimitiveCollection<HashSet<long>>("CardIds")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("jsonb")
-                        .HasDefaultValueSql("[]");
+                        .HasColumnType("jsonb");
 
                     b.Property<long?>("DeskEntityId")
                         .HasColumnType("bigint");
@@ -107,7 +108,7 @@ namespace Durak.Infrastructure.Migrations
                     b.Property<int>("ActionType")
                         .HasColumnType("integer");
 
-                    b.PrimitiveCollection<HashSet<long>>("BeatenCardIds")
+                    b.PrimitiveCollection<List<long>>("BeatenCardIds")
                         .IsRequired()
                         .HasColumnType("jsonb");
 

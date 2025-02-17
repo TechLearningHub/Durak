@@ -14,8 +14,8 @@ public class GameController : ControllerBase
     public GameController(IGameService gameService) => _gameService = gameService;
 
     [HttpPost]
-    public List<CardEntity>? Withdraw(int playerId, long deskId)
+    public HashSet<CardEntity>? Withdraw(int playerId, long deskId)
     {
-        return _gameService.Withdraw(playerId, deskId);
+        return _gameService.Withdraw(playerId, deskId).ToHashSet();
     }
 }

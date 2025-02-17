@@ -17,9 +17,9 @@ public class PlayerController : ControllerBase
     }
 
     [HttpPost]
-    public void Post(PlayerRequest playerRequest)
+    public PlayerResponse Post(PlayerRequest playerRequest)
     {
-        _playerService.AddPlayer(playerRequest);
+      return  _playerService.AddPlayer(playerRequest);
     }
 
     [HttpGet]

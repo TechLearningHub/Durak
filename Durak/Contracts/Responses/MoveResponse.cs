@@ -14,4 +14,5 @@ public class MoveResponse
     public bool IsBeaten { get; set; }
     public bool IsTaken { get; set; }
     public List<long> BeatenCardIds { get; set; } = [];
+    public IQueryable<CardEntity>? MovedCard { get; set; }
 }

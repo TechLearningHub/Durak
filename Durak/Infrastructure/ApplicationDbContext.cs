@@ -75,7 +75,8 @@ public sealed class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<HandEntity>()
             .Property(e => e.CardIds)
-            .HasColumnType("jsonb");
+            .HasColumnType("jsonb")
+            .HasDefaultValueSql("[]");
 
         modelBuilder.Entity<HandEntity>()
             .HasOne(e => e.Desk)
